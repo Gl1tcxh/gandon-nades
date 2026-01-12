@@ -1,13 +1,14 @@
 :root {
-    --cyber-pink: #FF003C;
-    --cyber-cyan: #00F0FF;
-    --cyber-purple: #B900E8;
-    --cyber-green: #00FF9F;
-    --cyber-yellow: #FCE300;
-    --cyber-red: #FF0055;
-    --dark-bg: #050505;
-    --dark-surface: #0f0f0f;
-    --grid-color: rgba(252, 227, 0, 0.08);
+    --army-green: #4A5D23;
+    --army-dark: #2B3A1A;
+    --army-darker: #1A2410;
+    --army-light: #6B8E23;
+    --army-highlight: #8FBC3F;
+    --olive-drab: #3D4A1F;
+    --military-tan: #9B8B6D;
+    --border-dark: #0E1008;
+    --border-light: #5A6D2E;
+    --text-green: #B8D978;
 }
 
 * {
@@ -17,15 +18,15 @@
 }
 
 body {
-    font-family: 'Rajdhani', sans-serif;
-    background: var(--dark-bg);
-    color: #fff;
+    font-family: Arial, 'Trebuchet MS', sans-serif;
+    background: var(--army-darker);
+    color: var(--text-green);
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
 }
 
-/* Animated background grid */
+/* Military textured background */
 body::before {
     content: '';
     position: fixed;
@@ -33,21 +34,11 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
-        linear-gradient(0deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: gridMove 20s linear infinite;
+    background: linear-gradient(180deg, #2B3A1A 0%, #1A2410 50%, #0F1808 100%);
     pointer-events: none;
     z-index: 0;
 }
 
-@keyframes gridMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
-}
-
-/* Scanline effect */
 body::after {
     content: '';
     position: fixed;
@@ -55,20 +46,16 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 50%,
-        rgba(252, 227, 0, 0.02) 50%
-    );
-    background-size: 100% 4px;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.05) 2px,
+            rgba(0, 0, 0, 0.05) 4px
+        );
     pointer-events: none;
     z-index: 1;
-    animation: scanlines 8s linear infinite;
-}
-
-@keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
 }
 
 .container {
@@ -79,404 +66,312 @@ body::after {
     padding: 20px;
 }
 
-/* Navigation Bar */
+/* Navigation Bar - Military Command Style */
 nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
-    padding: 25px 30px;
-    background: rgba(15, 15, 15, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--cyber-yellow);
-    box-shadow: 0 0 20px rgba(252, 227, 0, 0.3);
-    margin-bottom: 40px;
+    gap: 15px;
+    padding: 12px 20px;
+    background: linear-gradient(180deg, #4A5D23 0%, #3D4A1F 50%, #2B3A1A 100%);
+    border: 1px solid var(--border-dark);
+    border-bottom: 3px solid var(--border-dark);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
     position: relative;
 }
 
-nav::before {
+nav::after {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(252, 227, 0, 0.1) 50%, 
-        transparent 100%);
-    animation: navGlow 3s ease-in-out infinite;
-}
-
-@keyframes navGlow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--army-highlight), transparent);
 }
 
 .logo {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--cyber-yellow);
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--army-highlight);
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     text-shadow: 
-        0 0 10px var(--cyber-yellow),
-        0 0 20px var(--cyber-yellow),
-        0 0 30px var(--cyber-cyan);
-    animation: logoGlitch 5s infinite;
+        1px 1px 0 rgba(0, 0, 0, 0.8),
+        0 0 10px rgba(143, 188, 63, 0.5);
     position: relative;
     z-index: 1;
-}
-
-@keyframes logoGlitch {
-    0%, 90%, 100% { 
-        transform: translate(0); 
-        opacity: 1;
-    }
-    92% { 
-        transform: translate(-2px, 2px); 
-        opacity: 0.8;
-    }
-    94% { 
-        transform: translate(2px, -2px); 
-        opacity: 0.8;
-    }
 }
 
 .nav-btn {
     position: relative;
     z-index: 1;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-/* Button Styles */
+/* Button Styles - Military Tactical Buttons */
 .btn {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 12px 30px;
-    background: transparent;
-    color: var(--cyber-yellow);
-    border: 2px solid var(--cyber-yellow);
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 28px;
+    background: linear-gradient(180deg, #5A6D2E 0%, #4A5D23 50%, #3D4A1F 100%);
+    color: #E8F5D0;
+    border: 1px solid var(--border-dark);
+    border-top: 1px solid var(--border-light);
+    border-left: 1px solid var(--border-light);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    clip-path: polygon(
-        10px 0, 
-        100% 0, 
-        100% calc(100% - 10px), 
-        calc(100% - 10px) 100%, 
-        0 100%, 
-        0 10px
-    );
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        var(--cyber-yellow), 
-        transparent
-    );
-    transition: left 0.5s ease;
-}
-
-.btn:hover::before {
-    left: 100%;
+    overflow: visible;
+    transition: all 0.1s ease;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .btn:hover {
-    color: var(--dark-bg);
-    background: var(--cyber-yellow);
+    background: linear-gradient(180deg, #6A7D3E 0%, #5A6D2E 50%, #4D5A29 100%);
     box-shadow: 
-        0 0 20px var(--cyber-yellow),
-        0 0 40px var(--cyber-yellow),
-        inset 0 0 20px rgba(252, 227, 0, 0.5);
-    transform: translateY(-2px);
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .btn:active {
-    transform: translateY(0);
+    background: linear-gradient(180deg, #3D4A1F 0%, #4A5D23 50%, #5A6D2E 100%);
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.5),
+        0 1px 2px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
 }
 
-/* Secondary button style */
+/* Secondary button style - Bright tactical green */
 .btn-secondary {
-    border-color: var(--cyber-cyan);
-    color: var(--cyber-cyan);
-}
-
-.btn-secondary::before {
-    background: linear-gradient(90deg, 
-        transparent, 
-        var(--cyber-cyan), 
-        transparent
-    );
+    background: linear-gradient(180deg, #9FCC4F 0%, #8FBC3F 50%, #7AAC2F 100%);
+    color: #1A2410;
+    border-top: 1px solid #AFDC6F;
+    border-left: 1px solid #AFDC6F;
 }
 
 .btn-secondary:hover {
-    background: var(--cyber-cyan);
-    color: var(--dark-bg);
-    box-shadow: 
-        0 0 20px var(--cyber-cyan),
-        0 0 40px var(--cyber-cyan);
+    background: linear-gradient(180deg, #AFDC6F 0%, #9FCC4F 50%, #8FBC3F 100%);
 }
 
-/* Ghost button */
+.btn-secondary:active {
+    background: linear-gradient(180deg, #7AAC2F 0%, #8FBC3F 50%, #9FCC4F 100%);
+}
+
+/* Ghost button - Olive drab */
 .btn-ghost {
-    border-color: var(--cyber-pink);
-    color: var(--cyber-pink);
-}
-
-.btn-ghost::before {
-    background: linear-gradient(90deg, 
-        transparent, 
-        var(--cyber-pink), 
-        transparent
-    );
+    background: linear-gradient(180deg, #6B8E23 0%, #556B1F 50%, #3D4A1F 100%);
+    color: #E8F5D0;
+    border-top: 1px solid #7B9E33;
+    border-left: 1px solid #7B9E33;
 }
 
 .btn-ghost:hover {
-    background: var(--cyber-pink);
-    color: var(--dark-bg);
-    box-shadow: 0 0 20px var(--cyber-pink);
+    background: linear-gradient(180deg, #7B9E33 0%, #6B8E23 50%, #5A7A22 100%);
 }
 
-/* Typography Styles */
+.btn-ghost:active {
+    background: linear-gradient(180deg, #3D4A1F 0%, #556B1F 50%, #6B8E23 100%);
+}
+
+/* Typography Styles - Military Command Interface */
 h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(36px, 8vw, 72px);
-    font-weight: 900;
-    color: var(--cyber-yellow);
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: bold;
+    color: var(--army-highlight);
     text-transform: uppercase;
-    letter-spacing: 4px;
-    margin: 40px 0 30px;
+    letter-spacing: 2px;
+    margin: 30px 0 20px;
     text-align: center;
     text-shadow: 
-        0 0 10px var(--cyber-yellow),
-        0 0 20px var(--cyber-yellow),
-        0 0 40px var(--cyber-cyan),
-        2px 2px 0 var(--cyber-pink);
-    animation: titlePulse 2s ease-in-out infinite;
+        2px 2px 0 rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(143, 188, 63, 0.4);
     position: relative;
-}
-
-@keyframes titlePulse {
-    0%, 100% { 
-        text-shadow: 
-            0 0 10px var(--cyber-yellow),
-            0 0 20px var(--cyber-yellow),
-            0 0 40px var(--cyber-cyan),
-            2px 2px 0 var(--cyber-pink);
-    }
-    50% { 
-        text-shadow: 
-            0 0 20px var(--cyber-yellow),
-            0 0 40px var(--cyber-yellow),
-            0 0 60px var(--cyber-cyan),
-            2px 2px 0 var(--cyber-pink);
-    }
+    padding: 15px;
+    background: linear-gradient(180deg, rgba(61, 74, 31, 0.4) 0%, transparent 100%);
+    border-top: 2px solid rgba(143, 188, 63, 0.3);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
 
 h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(28px, 6vw, 48px);
-    font-weight: 700;
-    color: var(--cyber-cyan);
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: bold;
+    color: var(--army-light);
     text-transform: uppercase;
-    letter-spacing: 3px;
-    margin: 30px 0 20px;
-    text-shadow: 0 0 15px var(--cyber-cyan);
+    letter-spacing: 1px;
+    margin: 25px 0 15px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+    border-left: 4px solid var(--army-light);
+    padding-left: 12px;
 }
 
 h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(22px, 5vw, 36px);
-    font-weight: 700;
-    color: var(--cyber-pink);
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: clamp(18px, 4vw, 28px);
+    font-weight: bold;
+    color: var(--text-green);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 25px 0 15px;
-    text-shadow: 0 0 10px var(--cyber-pink);
+    letter-spacing: 1px;
+    margin: 20px 0 12px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
 }
 
 h4 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(20px, 4vw, 28px);
-    font-weight: 700;
-    color: var(--cyber-yellow);
+    font-family: Arial, sans-serif;
+    font-size: clamp(16px, 3.5vw, 22px);
+    font-weight: bold;
+    color: var(--army-highlight);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 20px 0 12px;
-}
-
-h5 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(18px, 3.5vw, 24px);
-    font-weight: 600;
-    color: var(--cyber-purple);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     margin: 18px 0 10px;
 }
 
-h6 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(16px, 3vw, 20px);
-    font-weight: 600;
-    color: var(--cyber-cyan);
+h5 {
+    font-family: Arial, sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: bold;
+    color: var(--text-green);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     margin: 15px 0 8px;
 }
 
+h6 {
+    font-family: Arial, sans-serif;
+    font-size: clamp(13px, 2.5vw, 16px);
+    font-weight: bold;
+    color: #8CA869;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 12px 0 6px;
+}
+
 p {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(16px, 2.5vw, 20px);
-    font-weight: 400;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 15px 0;
+    font-family: Arial, sans-serif;
+    font-size: clamp(13px, 2.5vw, 15px);
+    font-weight: normal;
+    line-height: 1.6;
+    color: var(--text-green);
+    margin: 12px 0;
 }
 
 strong, b {
-    font-weight: 700;
-    color: var(--cyber-yellow);
-    text-shadow: 0 0 8px var(--cyber-yellow);
+    font-weight: bold;
+    color: #D8F5A8;
 }
 
 em, i {
     font-style: italic;
-    color: var(--cyber-cyan);
+    color: var(--army-highlight);
 }
 
 a {
-    color: var(--cyber-yellow);
-    text-decoration: none;
-    border-bottom: 1px solid var(--cyber-yellow);
-    transition: all 0.3s ease;
+    color: var(--army-highlight);
+    text-decoration: underline;
+    transition: color 0.2s ease;
 }
 
 a:hover {
-    color: var(--cyber-cyan);
-    border-bottom-color: var(--cyber-cyan);
-    text-shadow: 0 0 10px var(--cyber-cyan);
+    color: #B8D978;
 }
 
 blockquote {
-    border-left: 4px solid var(--cyber-yellow);
-    padding-left: 20px;
-    margin: 20px 0;
+    border-left: 4px solid var(--army-light);
+    padding-left: 15px;
+    margin: 15px 0;
     font-style: italic;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(252, 227, 0, 0.05);
-    padding: 15px 20px;
+    color: #A0C070;
+    background: rgba(61, 74, 31, 0.3);
+    padding: 12px 15px;
 }
 
 code {
     font-family: 'Courier New', monospace;
-    background: rgba(252, 227, 0, 0.1);
-    color: var(--cyber-green);
+    background: rgba(43, 58, 26, 0.6);
+    color: var(--army-highlight);
     padding: 2px 6px;
-    border-radius: 3px;
+    border: 1px solid rgba(143, 188, 63, 0.3);
     font-size: 0.9em;
 }
 
 pre {
-    background: var(--dark-surface);
-    border: 1px solid var(--cyber-yellow);
-    padding: 20px;
+    background: var(--army-dark);
+    border: 2px inset var(--border-dark);
+    padding: 15px;
     overflow-x: auto;
-    margin: 20px 0;
-    border-radius: 5px;
+    margin: 15px 0;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 ul, ol {
-    margin: 15px 0;
-    padding-left: 30px;
+    margin: 12px 0;
+    padding-left: 25px;
 }
 
 li {
-    font-size: clamp(16px, 2.5vw, 18px);
-    line-height: 1.8;
-    margin: 8px 0;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(13px, 2.5vw, 15px);
+    line-height: 1.6;
+    margin: 6px 0;
+    color: var(--text-green);
 }
 
-/* Video Container */
+/* Video Container - Military Panel Style */
 .video-container {
     position: relative;
     max-width: 1000px;
-    margin: 50px auto;
-    padding: 0;
-    background: var(--dark-surface);
-    border: 3px solid var(--cyber-yellow);
+    margin: 30px auto;
+    padding: 8px;
+    background: linear-gradient(180deg, #3D4A1F 0%, #2B3A1A 100%);
+    border: 2px solid var(--border-dark);
+    border-top: 2px solid var(--border-light);
+    border-left: 2px solid var(--border-light);
     box-shadow: 
-        0 0 30px rgba(252, 227, 0, 0.5),
-        0 0 60px rgba(0, 240, 255, 0.3),
-        inset 0 0 30px rgba(252, 227, 0, 0.1);
-    clip-path: polygon(
-        20px 0, 
-        100% 0, 
-        100% calc(100% - 20px), 
-        calc(100% - 20px) 100%, 
-        0 100%, 
-        0 20px
-    );
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.6);
     overflow: hidden;
-    animation: videoGlow 3s ease-in-out infinite;
-}
-
-@keyframes videoGlow {
-    0%, 100% { 
-        box-shadow: 
-            0 0 30px rgba(252, 227, 0, 0.5),
-            0 0 60px rgba(0, 240, 255, 0.3),
-            inset 0 0 30px rgba(252, 227, 0, 0.1);
-    }
-    50% { 
-        box-shadow: 
-            0 0 40px rgba(252, 227, 0, 0.7),
-            0 0 80px rgba(0, 240, 255, 0.5),
-            inset 0 0 40px rgba(252, 227, 0, 0.15);
-    }
 }
 
 .video-container::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, 
-        var(--cyber-yellow), 
-        var(--cyber-cyan), 
-        var(--cyber-pink),
-        var(--cyber-yellow)
-    );
-    background-size: 300% 300%;
-    animation: borderFlow 4s ease infinite;
-    z-index: -1;
-    border-radius: 5px;
-    filter: blur(5px);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: linear-gradient(180deg, #5A6D2E 0%, #4A5D23 100%);
+    border-bottom: 2px solid var(--border-dark);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 2;
 }
 
-@keyframes borderFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.video-container::after {
+    content: 'CS 2 - TACTICAL GAMEPLAY';
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--text-green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+    z-index: 3;
 }
 
 video {
@@ -485,64 +380,46 @@ video {
     display: block;
     position: relative;
     z-index: 1;
+    margin-top: 24px;
+    border: 1px solid var(--border-dark);
 }
 
-/* Video overlay effects */
-.video-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(252, 227, 0, 0.05) 50%,
-        transparent 100%
-    );
-    pointer-events: none;
-    animation: videoScan 3s linear infinite;
-}
-
-@keyframes videoScan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-/* Demo content section */
+/* Demo content section - Military Panel */
 .content-demo {
     max-width: 900px;
-    margin: 60px auto;
-    padding: 30px;
-    background: rgba(15, 15, 15, 0.8);
-    border: 1px solid var(--cyber-cyan);
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(180deg, #3D4A1F 0%, #2B3A1A 100%);
+    border: 2px solid var(--border-dark);
+    border-top: 2px solid var(--border-light);
+    border-left: 2px solid var(--border-light);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .button-showcase {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    margin: 30px 0;
+    gap: 12px;
+    margin: 20px 0;
     justify-content: center;
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
     nav {
-        padding: 20px 15px;
-        gap: 20px;
+        padding: 10px 15px;
+        gap: 12px;
     }
 
     .logo {
-        font-size: 22px;
+        font-size: 18px;
         text-align: center;
     }
 
     .nav-btn {
-        gap: 15px;
+        gap: 8px;
     }
 
     .container {
@@ -550,24 +427,24 @@ video {
     }
 
     h1 {
-        margin: 30px 0 20px;
-        letter-spacing: 2px;
+        margin: 20px 0 15px;
+        letter-spacing: 1px;
+        padding: 10px;
     }
 
     .video-container {
-        margin: 30px auto;
-        border-width: 2px;
+        margin: 20px auto;
+        padding: 6px;
     }
 
     .btn {
-        padding: 10px 20px;
-        font-size: 14px;
-        letter-spacing: 1px;
+        padding: 7px 20px;
+        font-size: 13px;
     }
 
     .content-demo {
-        padding: 20px;
-        margin: 40px auto;
+        padding: 15px;
+        margin: 30px auto;
     }
 
     .button-showcase {
@@ -578,21 +455,12 @@ video {
     .button-showcase .btn {
         width: 100%;
     }
-
-    body::before {
-        background-size: 30px 30px;
-    }
-
-    @keyframes gridMove {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(30px, 30px); }
-    }
 }
 
 @media (max-width: 480px) {
     .logo {
-        font-size: 18px;
-        letter-spacing: 2px;
+        font-size: 16px;
+        letter-spacing: 1px;
     }
 
     .nav-btn {
@@ -601,38 +469,14 @@ video {
 
     .nav-btn .btn {
         flex: 1;
-        min-width: 120px;
+        min-width: 100px;
     }
 
-    .video-container {
-        clip-path: polygon(
-            10px 0, 
-            100% 0, 
-            100% calc(100% - 10px), 
-            calc(100% - 10px) 100%, 
-            0 100%, 
-            0 10px
-        );
+    .video-container::after {
+        font-size: 9px;
     }
-
-    .btn {
-        clip-path: polygon(
-            5px 0, 
-            100% 0, 
-            100% calc(100% - 5px), 
-            calc(100% - 5px) 100%, 
-            0 100%, 
-            0 5px
-        );
-    }
-}
-
-/* Loading animation for video */
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
 }
 
 .loading {
-    animation: pulse 1.5s ease-in-out infinite;
+    opacity: 0.6;
 }
